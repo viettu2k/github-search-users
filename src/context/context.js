@@ -32,18 +32,21 @@ const GithubProvider = ({ children }) => {
     if (response) {
       setGithubUser(response.data);
       const { login, followers_url } = response.data;
-      // repos
-      axios(`${rootUrl}/users/${login}/repos?per_page=100`)
-        .then((response) => setRepos(response.data))
-        .catch((err) => console.log(err));
-      // followers
-      axios(`${followers_url}?per_page=100`)
-        .then((response) => setFollowers(response.data))
-        .catch((err) => console.log(err));
-      // repos
-      // https://api.github.com/users/viettu2k/repos?per_page=100
-      // followers
-      // https://api.github.com/users/viettu2k/followers
+      await Promise.allSettled([
+        axios(`${rootUrl}/users/${login}/repos?per_page=100`),
+        axios(`${followers_url}?per_page=100`),
+      ])
+        .then((results) => {
+          const [repos, followers] = results;
+          const status = "fulfilled";
+          if (repos.status === status) {
+            setRepos(repos.value.data);
+          }
+          if (followers.status === status) {
+            setFollowers(followers.value.data);
+          }
+        })
+        .catch((error) => console.log(error));
     } else {
       toggleError(true, "there is no uer with that username");
     }
