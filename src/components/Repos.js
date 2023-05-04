@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import { GithubContext } from "../context/context";
-import { Pie3D, Column3D, Bar3D, Doughnut2D } from "./Charts";
+import React from 'react';
+import styled from 'styled-components';
+import { GithubContext } from '../context/context';
+import { Pie3D, Column3D, Bar3D, Doughnut2D } from './Charts';
 
 const Repos = () => {
   const { repos } = React.useContext(GithubContext);
@@ -27,7 +27,6 @@ const Repos = () => {
     })
     .slice(0, 3);
 
-  // most stars per language
   const mostPopular = Object.values(languages)
     .sort((a, b) => {
       return b.stars - a.stars;
@@ -37,7 +36,6 @@ const Repos = () => {
     })
     .slice(0, 3);
 
-  // stars, forks
   let { stars, forks } = repos.reduce(
     (total, item) => {
       const { stargazers_count, name, forks } = item;
@@ -55,8 +53,8 @@ const Repos = () => {
   forks = Object.values(forks).slice(-5).reverse();
 
   return (
-    <section className="section">
-      <Wrapper className="section-center">
+    <section className='section'>
+      <Wrapper className='section-center'>
         <Pie3D data={mostUsed} />
         <Column3D data={stars} />
         <Doughnut2D data={mostPopular} />
@@ -77,7 +75,6 @@ const Wrapper = styled.div`
   @media (min-width: 1200px) {
     grid-template-columns: 2fr 3fr;
   }
-
   div {
     width: 100% !important;
   }
@@ -90,4 +87,4 @@ const Wrapper = styled.div`
   }
 `;
 
-export default Repos;
+export default React.memo(Repos);

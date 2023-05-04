@@ -1,13 +1,14 @@
-import React from "react";
-import { GithubContext } from "../context/context";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+
+import { GithubContext } from '../context/context';
 
 const Followers = () => {
   const { followers } = React.useContext(GithubContext);
 
   return (
     <Wrapper>
-      <div className="followers">
+      <div className='followers'>
         {followers.map((follower, index) => {
           const { avatar_url: img, html_url, login } = follower;
           return (
@@ -31,9 +32,8 @@ const Wrapper = styled.article`
   border-bottom-left-radius: var(--radius);
   border-bottom-right-radius: var(--radius);
   position: relative;
-
   &::before {
-    content: " followers";
+    content: ' followers';
     position: absolute;
     top: 0;
     left: 0;
@@ -77,4 +77,5 @@ const Wrapper = styled.article`
     }
   }
 `;
-export default Followers;
+
+export default React.memo(Followers);

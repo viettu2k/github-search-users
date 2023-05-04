@@ -1,15 +1,16 @@
-import React from "react";
-import { useAuth0 } from "@auth0/auth0-react";
-import loadingGif from "../images/preloader.gif";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+import { useAuth0 } from '@auth0/auth0-react';
 
-function AuthWrapper({ children }) {
+import loadingGif from '../images/preloader.gif';
+
+const AuthWrapper = ({ children }) => {
   const { isLoading, error } = useAuth0();
 
   if (isLoading) {
     return (
       <Wrapper>
-        <img src={loadingGif} alt="spinner" />
+        <img src={loadingGif} alt='spinner' />
       </Wrapper>
     );
   }
@@ -23,7 +24,7 @@ function AuthWrapper({ children }) {
   }
 
   return <>{children}</>;
-}
+};
 
 const Wrapper = styled.section`
   min-height: 100vh;
@@ -34,4 +35,4 @@ const Wrapper = styled.section`
   }
 `;
 
-export default AuthWrapper;
+export default React.memo(AuthWrapper);

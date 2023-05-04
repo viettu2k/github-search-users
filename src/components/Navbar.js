@@ -1,10 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { useAuth0 } from "@auth0/auth0-react";
+import React from 'react';
+import styled from 'styled-components';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Navbar = () => {
   const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
-
   const isUser = isAuthenticated && user;
 
   return (
@@ -57,4 +56,4 @@ const Wrapper = styled.nav`
   }
 `;
 
-export default Navbar;
+export default React.memo(Navbar);

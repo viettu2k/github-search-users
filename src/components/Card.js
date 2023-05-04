@@ -1,7 +1,8 @@
-import React from "react";
-import { GithubContext } from "../context/context";
-import styled from "styled-components";
-import { MdBusiness, MdLocationOn, MdLink } from "react-icons/md";
+import React from 'react';
+import styled from 'styled-components';
+import { MdBusiness, MdLocationOn, MdLink } from 'react-icons/md';
+
+import { GithubContext } from '../context/context';
 
 const Card = () => {
   const { githubUser } = React.useContext(GithubContext);
@@ -26,8 +27,8 @@ const Card = () => {
         </div>
         <a href={html_url}>follow</a>
       </header>
-      <p className="bio">{bio}</p>
-      <div className="links">
+      <p className='bio'>{bio}</p>
+      <div className='links'>
         <p>
           <MdBusiness /> {company}
         </p>
@@ -53,7 +54,7 @@ const Wrapper = styled.article`
   border-bottom-right-radius: var(--radius);
   position: relative;
   &::before {
-    content: "user";
+    content: 'user';
     position: absolute;
     top: 0;
     left: 0;
@@ -125,4 +126,5 @@ const Wrapper = styled.article`
     }
   }
 `;
-export default Card;
+
+export default React.memo(Card);
